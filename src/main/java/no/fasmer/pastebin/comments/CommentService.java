@@ -15,10 +15,10 @@ import reactor.core.publisher.Mono;
 @EnableBinding(CustomProcessor.class)
 public class CommentService {
 
-    private final CommentWriterRepository commentWriterRepository;
+    private final CommentRepository commentWriterRepository;
     private final MeterRegistry meterRegistry;
 
-    public CommentService(CommentWriterRepository commentWriterRepository, MeterRegistry meterRegistry) {
+    public CommentService(CommentRepository commentWriterRepository, MeterRegistry meterRegistry) {
         this.commentWriterRepository = commentWriterRepository;
         this.meterRegistry = meterRegistry;
     }
@@ -38,7 +38,7 @@ public class CommentService {
     }
     
     @Bean
-    CommandLineRunner setUp(CommentWriterRepository repository) {
+    CommandLineRunner setUp(CommentRepository repository) {
         return args -> {
             repository.deleteAll().subscribe();
         };
